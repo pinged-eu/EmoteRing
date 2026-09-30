@@ -1,0 +1,15 @@
+## Interface: 120007
+## Title: EmoteRing
+## Notes: Ein radialer Emote-Ring im Stil des Retail-Ping-Systems.
+## Author: ChromieDE
+## Version: 0.2.2
+## SavedVariables: EmoteRingDB
+## IconTexture: Interface\AddOns\EmoteRing\Media\logo
+## Category-deDE: Rollenspiel
+## Category-enUS: Roleplay
+
+Data.lua
+Core.lua
+Ring.lua
+Minimap.lua
+Options.lua

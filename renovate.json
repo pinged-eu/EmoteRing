@@ -1,0 +1,62 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "timezone": "Europe/Berlin",
+  "extends": [
+    "config:recommended",
+    "schedule:nonOfficeHours"
+  ],
+  "ignorePaths": [
+    ".dagger/**"
+  ],
+  "lockFileMaintenance": {
+    "enabled": true,
+    "automerge": true,
+    "schedule": [
+    "* * * * 0,6"
+    ],
+    "automergeType": "branch"
+  },
+  "packageRules": [
+    {
+      "description": "Automatically merge minor and patch-level updates",
+      "matchUpdateTypes": [
+        "minor",
+        "patch",
+        "digest",
+        "pin"
+      ],
+      "automerge": true,
+      "automergeType": "branch"
+    },
+    {
+      "matchDepTypes": [
+        "devDependencies"
+      ],
+      "automerge": true
+    },
+    {
+      "labels": [
+        "linting"
+      ],
+      "matchPackageNames": [
+        "/eslint/"
+      ]
+    },
+    {
+      "matchDepTypes": [
+        "optionalDependencies"
+      ],
+      "addLabels": [
+        "optional"
+      ]
+    }
+  ],
+  "commitMessagePrefix": "chore(deps): ⬆️",
+  "addLabels": [
+    "dependencies"
+  ],
+  "assigneesFromCodeOwners": true,
+  "reviewersFromCodeOwners": true,
+  "branchConcurrentLimit": 5,
+  "prConcurrentLimit": 9
+}

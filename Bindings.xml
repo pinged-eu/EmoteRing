@@ -1,0 +1,6 @@
+<Bindings>
+    <Binding name="EMOTERING_OPEN" header="EMOTERING" runOnUp="true">
+        EmoteRing_OnBinding(keystate)
+    </Binding>
+</Bindings>
+

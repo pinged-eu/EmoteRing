@@ -1,0 +1,13 @@
+include:
+  - project: 'ds_2/ci-templates'
+    ref: v3.3.0
+    file: # you can add multiple files you need for your project
+      - '/templates/stages.yaml'
+      - '/templates/global-vars.yaml'
+      - '/templates/check-license-reuse.yaml'
+      - '/templates/release-marker.yaml'
+      # here you can add additional templates ..
+
+variables:
+  a: 123
+  # here you can define some workflow variables

@@ -1,0 +1,85 @@
+# do not modify gitattributes
+.gitattributes text -filter -diff
+
+# use LF for all text files
+* text=auto eol=lf
+
+# Configs
+*.tfvars filter=git-crypt diff=git-crypt
+*.tfstate filter=git-crypt diff=git-crypt
+*.tfstate.backup filter=git-crypt diff=git-crypt
+aws_sec*.properties filter=git-crypt diff=git-crypt
+*.pem filter=git-crypt diff=git-crypt
+*.crt filter=git-crypt diff=git-crypt
+*.key filter=git-crypt diff=git-crypt
+*.p7b filter=git-crypt diff=git-crypt
+*.asc filter=git-crypt diff=git-crypt
+*.afdesign binary filter=git-crypt diff=git-crypt
+secrets/** filter=git-crypt diff=git-crypt
+google-services.json filter=git-crypt diff=git-crypt
+
+# binary files: use binary by default, since jj does not know lfs; replace binary with: filter=lfs diff=lfs merge=lfs -text
+*.bin binary
+*.jar binary
+*.pdf binary
+*.war binary
+*.ttf binary
+*.otf binary
+*.eot binary
+*.ipa binary
+*.woff binary
+*.woff2 binary
+*.png binary
+*.gif binary
+*.ico binary
+*.jpg binary
+*.jpeg binary
+*.webp binary
+*.svg text
+*.xml text
+*.json text
+*.adoc text
+*.toml text
+*.gpg binary
+
+# Archives
+*.zip binary
+*.7z binary
+*.tar binary
+*.gz binary
+*.tgz binary
+*.xz binary
+
+# WoW Addon Development
+*.lua text
+*.toc text
+
+# OpenOffice, LibreOffice, Microsoft Office
+*.odg binary
+*.doc binary
+*.docx binary
+*.odt binary
+*.xls binary
+*.xlsx binary
+*.ods binary
+*.odp binary
+*.ppt binary
+*.pptx binary
+
+# Linux/Unix
+*.sh text eol=lf
+
+# Windows CRLF
+*.[cC][mM][dD] text eol=crlf
+*.[bB][aA][tT] text eol=crlf
+*.[iI][cC][sS] text eol=crlf
+*.ps1 text eol=lf
+
+# MacOS
+*.plist text eol=lf
+*.DS_Store binary
+
+# if you change something here: git add --renormalize .
+# to update any historical mappings (and rewrite history!!): 
+#   git commit -m 'build(gitattributes): update mappings'
+#   git lfs track "*.psd" && git lfs migrate import --include="*.psd" --everything

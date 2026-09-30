@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <path
+    d="M256 62 A194 194 0 1 1 255.99 62 Z M256 195 A61 61 0 1 1 255.99 195 Z"
+    fill="#ffffff"
+    fill-opacity="0.82"
+    fill-rule="evenodd"
+    clip-rule="evenodd"
+  />
+</svg>
