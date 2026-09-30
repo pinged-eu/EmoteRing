@@ -7,14 +7,12 @@
 !.dockerignore
 !.gitattributes
 !.github
-!.gitlab
 !.forgejo
 !.dagger
 !.gitsecret
 !.terraformignore
 !.pre-commit-config.yaml
 !.pre-commit-check-config.yaml
-!.gitlab-ci.yml
 !.woodpecker.yml
 !.licenserc.yaml
 !.semver-version
