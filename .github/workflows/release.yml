@@ -1,0 +1,25 @@
+name: Package and release
+
+# Only release when an annotated version tag (e.g. v0.2.2) is pushed.
+on:
+  push:
+    tags:
+      - 'v*'
+
+# Needed so the packager can create a GitHub release.
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_OAUTH: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - name: Clone project
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # full history, needed for the automatic changelog
+
+      - name: Package and release
+        uses: BigWigsMods/packager@v2

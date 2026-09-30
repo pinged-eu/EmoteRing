@@ -18,6 +18,7 @@
 !.woodpecker.yml
 !.licenserc.yaml
 !.semver-version
+!.pkgmeta
 .gitsecret/keys/random_seed
 !*.secret
 !.updatePreRelease.ps1

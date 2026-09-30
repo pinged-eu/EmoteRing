@@ -1,0 +1,6 @@
+package-as: EmoteRing
+
+ignore:
+  - renovate.json
+  - REUSE.toml
+  - "*.svg" # design sources, not used by the client (only the .tga exports are)
