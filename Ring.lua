@@ -34,7 +34,7 @@ end
 
 local function CreateIconFrame(parent, index)
     local angle = (index - 1) * SLOT_ANGLE
-    local frame = CreateFrame("Frame", nil, parent, "BackdropTemplate")
+    local frame = Addon:CreateBackdropFrame("Frame", nil, parent)
     frame:SetSize(50, 50)
     frame:SetPoint("CENTER", parent, "CENTER", math.sin(angle) * ICON_RADIUS, math.cos(angle) * ICON_RADIUS)
     frame:SetBackdrop({
@@ -64,7 +64,7 @@ end
 
 local function CreateLayoutSelector(parent, index)
     local angle = (index - 1) * LAYOUT_ANGLE
-    local selector = CreateFrame("Frame", nil, parent, "BackdropTemplate")
+    local selector = Addon:CreateBackdropFrame("Frame", nil, parent)
     selector:SetSize(30, 30)
     selector:SetPoint("CENTER", parent, "CENTER", math.sin(angle) * LAYOUT_RADIUS, math.cos(angle) * LAYOUT_RADIUS)
     selector:SetBackdrop({
@@ -371,7 +371,7 @@ function Addon:OpenRing(previewMode)
     if previewMode then
         wheel.previewSerial = (wheel.previewSerial or 0) + 1
         local previewSerial = wheel.previewSerial
-        C_Timer.After(5, function()
+        Addon:After(5, function()
             if wheel:IsShown() and wheel.previewMode and wheel.previewSerial == previewSerial then
                 wheel:Hide()
             end
@@ -408,7 +408,7 @@ function Addon:ReleaseRing(skipTargetRestore)
     end
 
     if subjectState and not skipTargetRestore then
-        C_Timer.After(0, function()
+        Addon:After(0, function()
             Addon:RestoreMouseoverSubject(subjectState)
         end)
     end

@@ -13,7 +13,7 @@ path = [
     "Options.lua",
     "Ring.lua",
     "Media/**",
-    "EmoteRing.toc",
+    "EmoteRing*.toc",
     "LICENSE.txt",
     "README.txt",
 ]
@@ -35,6 +35,7 @@ path = [
     "curseforge-origin.md",
     "REUSE.toml",
     "CHANGELOG.md",
+    ".changelogs/**",
     "cliff.toml",
 ]
 precedence = "closest"
