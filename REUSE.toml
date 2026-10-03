@@ -1,0 +1,40 @@
+version = 1
+SPDX-PackageName = "EmoteRing - WoW Addon"
+SPDX-PackageDownloadLocation = "https://www.curseforge.com/wow/addons/emote-ring"
+SPDX-PackageSupplier = "ChromieDE"
+
+# ChromieDE:
+[[annotations]]
+path = [
+	"Data.lua",
+    "Core.lua",
+    "Bindings.xml",
+    "Minimap.lua",
+    "Options.lua",
+    "Ring.lua",
+    "Media/**",
+    "EmoteRing.toc",
+    "LICENSE.txt",
+    "README.txt",
+]
+precedence = "closest"
+SPDX-FileCopyrightText = "ChromieDE"
+SPDX-License-Identifier = "MIT"
+
+# Lexxy/Papua:
+[[annotations]]
+path = [
+	"renovate.json",
+    ".github/**",
+    ".editorconfig",
+    ".gitignore",
+    ".gitattributes",
+    ".pkgmeta",
+    ".semver-version",
+    "CONTRIBUTING.md",
+    "curseforge-origin.md",
+    "REUSE.toml",
+]
+precedence = "closest"
+SPDX-FileCopyrightText = "Lexxy, Dirk Strauss"
+SPDX-License-Identifier = "MIT"
