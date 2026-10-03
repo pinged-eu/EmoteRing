@@ -4,6 +4,20 @@ Diese Anleitung richtet sich an Contributors, die den Code aus diesem
 Repository direkt im laufenden WoW-Client testen möchten, ohne den Ordner
 nach jeder Änderung manuell in `Interface\AddOns` zu kopieren.
 
+## Einrichten von GitFlow
+
+Wir nutzen GitFlow, um parallele Änderungen am Code zu machen. Primär das Tool `Git Flow Next`.
+
+Die Einrichtung nach dem Checkout sollte so aussehen:
+
+```powershell
+git-flow init --develop=develop --feature=feat/ --bugfix=fix/ --release=release/ --tag="v" --main=midnight
+```
+
+Wir nutzen als Hauptentwicklungsbranch _develop_. Hier kommen alle aktiven Änderungen rauf.
+Für Releases nutzen wir den _releases_ Zweig.
+Finale Releases landen letztlich dadurch auf dem _main_ Zweig.
+
 ## Repo-Ordner mit `Interface\AddOns` verlinken (Windows)
 
 Statt den Addon-Ordner zu kopieren, legt man einen symbolischen Link (Symlink)
