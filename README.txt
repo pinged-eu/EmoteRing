@@ -65,7 +65,7 @@ Befehle
 
 Umfang dieser Version
 ---------------------
-- World of Warcraft Retail, Interface 120007
+- World of Warcraft Retail, Interface 120100/120105
 - Vier Layouts mit jeweils acht frei belegbaren Ringplätzen
 - Kategorie-Filter, Suche und Sortierung der Emote-Auswahl
 - Deutsches und englisches Interface
