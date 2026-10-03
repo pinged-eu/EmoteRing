@@ -34,6 +34,8 @@ path = [
     "CONTRIBUTING.md",
     "curseforge-origin.md",
     "REUSE.toml",
+    "CHANGELOG.md",
+    "cliff.toml",
 ]
 precedence = "closest"
 SPDX-FileCopyrightText = "Lexxy, Dirk Strauss"
