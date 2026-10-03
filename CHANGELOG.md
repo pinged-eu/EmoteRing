@@ -6,7 +6,7 @@ Versionierung an [Semantic Versioning].
 
 [Keep a Changelog]: https://keepachangelog.com/de/1.1.0/
 [Semantic Versioning]: https://semver.org/lang/de/
-## [0.4.0] - 2026-10-03
+## [Unreleased]
 
 ### Features
 
@@ -26,6 +26,8 @@ Versionierung an [Semantic Versioning].
 
 - Add Windows symlink setup guide for contributors ([57e5b99](https://github.com/pinged-eu/EmoteRing/commit/57e5b99d771844133fca69aae9bc35115d98e613))
 
+- **contribution:** Update contrib about how to use git flow ([8a196b9](https://github.com/pinged-eu/EmoteRing/commit/8a196b9c29019d20f7ff8495980749e179e6fd1a))
+
 
 ### Dependencies
 
@@ -42,7 +44,7 @@ Versionierung an [Semantic Versioning].
 
 - **toc:** Support WoW 12.1.0 and 12.1.5 (#2) ([0011ea8](https://github.com/pinged-eu/EmoteRing/commit/0011ea8cd74a38049090c4865ea0d70b35c2f883))
 
-- **changelog:** Add git-cliff config for Markdown changelogs ([5da806c](https://github.com/pinged-eu/EmoteRing/commit/5da806ce3053e4e34c895122eac22244bca1c2f3))
+- **changelog:** Add git-cliff config for Markdown changelogs (#8) ([db16528](https://github.com/pinged-eu/EmoteRing/commit/db165288e5558191a2b7193a1e42c5bff508dac3))
 
 
 ### Continuous Integration

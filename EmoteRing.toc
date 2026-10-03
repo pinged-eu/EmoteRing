@@ -2,7 +2,7 @@
 ## Title: EmoteRing
 ## Notes: Ein radialer Emote-Ring im Stil des Retail-Ping-Systems.
 ## Author: ChromieDE
-## Version: 0.2.2
+## Version: 0.4.0
 ## SavedVariables: EmoteRingDB
 ## IconTexture: Interface\AddOns\EmoteRing\Media\logo
 ## Category-deDE: Rollenspiel
