@@ -1,5 +1,5 @@
-## Interface: 38001
-## Title: EmoteRing (WotLk)
+## Interface: 38001, 38002
+## Title: EmoteRing
 ## Notes: Ein radialer Emote-Ring im Stil des Retail-Ping-Systems.
 ## Author: ChromieDE
 ## Version: 0.4.0
