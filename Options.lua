@@ -66,18 +66,26 @@ local function CreateCheck(parent, label, tooltip)
     return check
 end
 
+local function IsModifierKey(key)
+    if not key then
+        return false
+    end
+    local upper = key:upper()
+    return upper == "LSHIFT" or upper == "RSHIFT"
+        or upper == "LCTRL" or upper == "RCTRL"
+        or upper == "LALT" or upper == "RALT"
+end
+
 local function KeyWithModifiers(key)
     if not key then
         return nil
     end
 
-    local upper = key:upper()
-    if upper == "LSHIFT" or upper == "RSHIFT"
-        or upper == "LCTRL" or upper == "RCTRL"
-        or upper == "LALT" or upper == "RALT" then
+    if IsModifierKey(key) then
         return nil
     end
 
+    local upper = key:upper()
     if key == "LeftButton" then
         upper = "BUTTON1"
     elseif key == "RightButton" then
@@ -140,8 +148,18 @@ function Addon:FinishBindingCapture(key)
         return
     end
 
+    if not key then
+        return
+    end
+
+    if IsModifierKey(key) then
+        -- Keep the dialog open while a modifier is held on its own so
+        -- combinations such as ALT-K can still be captured.
+        return
+    end
+
     capture:Hide()
-    if not key or key == "ESCAPE" then
+    if key == "ESCAPE" then
         return
     end
 
@@ -185,11 +203,11 @@ local function CreateBindingCapture(panel)
     local border = capture:CreateTexture(nil, "ARTWORK")
     border:SetColorTexture(0.92, 0.64, 0.08, 0.85)
     border:SetPoint("CENTER")
-    border:SetSize(430, 126)
+    border:SetSize(430, 168)
 
     local inner = CreateFrame("Frame", nil, capture, "BackdropTemplate")
     inner:SetPoint("CENTER")
-    inner:SetSize(426, 122)
+    inner:SetSize(426, 164)
     ApplyDarkBackdrop(inner, 1)
 
     local title = inner:CreateFontString(nil, "OVERLAY", "GameFontNormalHuge")
@@ -200,6 +218,11 @@ local function CreateBindingCapture(panel)
     local hint = inner:CreateFontString(nil, "OVERLAY", "GameFontHighlight")
     hint:SetPoint("TOP", title, "BOTTOM", 0, -14)
     hint:SetText(Addon.L.PRESS_KEY_HINT)
+
+    local umlautHint = inner:CreateFontString(nil, "OVERLAY", "GameFontDisableSmall")
+    umlautHint:SetPoint("TOP", hint, "BOTTOM", 0, -12)
+    umlautHint:SetWidth(380)
+    umlautHint:SetText(Addon.L.PRESS_KEY_UMLAUT_HINT)
 
     capture:SetScript("OnKeyDown", function(_, key)
         Addon:FinishBindingCapture(key)
