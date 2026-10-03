@@ -35,6 +35,7 @@ path = [
     "curseforge-origin.md",
     "REUSE.toml",
     "CHANGELOG.md",
+    ".changelogs/**",
     "cliff.toml",
 ]
 precedence = "closest"

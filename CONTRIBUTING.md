@@ -107,21 +107,24 @@ Statt einer einzigen TOC-Datei nutzt EmoteRing Blizzards Multi-TOC-Konvention
 (`AddonName_Flavor.toc`), damit ein Client automatisch die zu ihm passende
 Datei lädt:
 
-- `EmoteRing.toc` — Fallback, u. a. für WoW Forever (Client 1.60.1,
-  Interface 16001) und Classic Era, da diese keinen von Blizzard definierten
-  Flavor-Suffix besitzen bzw. der Suffix nicht erkannt wird.
-- `EmoteRing_Mainline.toc` — Retail
+- `EmoteRing.toc` — Fallback, u. a. für Classic Era, da dieser Client keinen
+  von Blizzard definierten Flavor-Suffix besitzt bzw. der Suffix nicht
+  erkannt wird.
+- `EmoteRing_Mainline.toc` — Retail. Der WoW-Forever-Client (1.60.1) meldet
+  sich clientseitig ebenfalls als "Mainline" und lädt daher diese Datei
+  (durch einen Test mit unterschiedlichen `## Title`-Werten je TOC-Datei
+  verifiziert).
 - `EmoteRing_TBC.toc` — Burning Crusade Classic
 - `EmoteRing_Wrath.toc` — Wrath of the Lich King Classic
 - `EmoteRing_Mists.toc` — Mists of Pandaria Classic
 
-Findet der Client keine zu seinem Flavor passende Datei (z. B. bei WoW
-Forever, da `_Forever` kein von Blizzard erkanntes Suffix ist), lädt er
-stattdessen `EmoteRing.toc`. Deshalb listet deren `## Interface`-Zeile neben
-der Classic-Era-Nummer auch 16001, damit das Addon dort nicht als
-"inkompatibel" markiert wird. Mit `/run print(select(4, GetBuildInfo()))`
-lässt sich im jeweiligen Client die tatsächlich erwartete Interface-Nummer
-ermitteln.
+Findet der Client keine zu seinem Flavor passende Datei, lädt er stattdessen
+`EmoteRing.toc`. Da WoW Forever als "Mainline" erkannt wird, enthält die
+`## Interface`-Zeile von `EmoteRing_Mainline.toc` zusätzlich die nicht
+offiziell von Blizzard unterstützte Interface-Nummer 16001, damit das Addon
+dort nicht als "inkompatibel" markiert wird. Mit
+`/run print(select(4, GetBuildInfo()))` lässt sich im jeweiligen Client die
+tatsächlich erwartete Interface-Nummer ermitteln.
 
 Da die API von WoW Forever nicht vollständig dokumentiert ist, enthält der
 Code an mehreren Stellen defensive Kompatibilitäts-Hilfsfunktionen statt
@@ -136,7 +139,7 @@ harter Annahmen über moderne Retail-APIs:
 - Fallback auf `InterfaceOptions_AddCategory`/`InterfaceOptionsFrame_OpenToCategory`,
   falls die moderne `Settings`-API nicht vorhanden ist.
 
-Diese Annahmen (insbesondere die Interface-Nummer 16001 sowie der API-Umfang)
-sind bislang nicht am echten Forever-Client verifiziert. Rückmeldungen (inkl.
-Lua-Fehlern über BugSack/BugGrabber bzw. `/console scriptErrors 1`) zu diesem
-Client sind daher besonders willkommen.
+Diese Kompatibilitäts-Hilfsfunktionen sind bislang nicht am echten
+Forever-Client verifiziert, auch wenn die TOC-Zuordnung (Mainline) jetzt
+bestätigt ist. Rückmeldungen (inkl. Lua-Fehlern über BugSack/BugGrabber bzw.
+`/console scriptErrors 1`) zu diesem Client sind daher weiterhin willkommen.
