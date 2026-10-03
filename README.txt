@@ -9,6 +9,9 @@ Installation
 2. World of Warcraft starten oder /reload eingeben.
 3. Escape > Optionen > Addons > EmoteRing öffnen.
 4. Eine Taste festlegen.
+   Hinweis: Umlaut-/Sondertasten (ü, ö, ä, ß) funktionieren clientbedingt
+   nicht zuverlässig als Tastenbelegung. Bitte einen Buchstaben, eine Zahl,
+   eine F-Taste oder eine Modifikator-Kombination (z. B. ALT-K) verwenden.
 
 Beim Update von einer älteren Testversion wird die alte Taste beim Login auf
 das sichere Mouseover-Binding umgestellt. Falls im Chat eine entsprechende
