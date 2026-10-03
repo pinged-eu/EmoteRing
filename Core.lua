@@ -31,7 +31,8 @@ end
 -- since 8.0. On such clients SetBackdrop is built into the base Frame
 -- mixin instead, so creating the frame without the template still works.
 function Addon:CreateBackdropFrame(frameType, name, parent, inherits)
-    local ok, frame = pcall(CreateFrame, frameType, name, parent, "BackdropTemplate")
+    local backdropInherits = inherits and (inherits .. ",BackdropTemplate") or "BackdropTemplate"
+    local ok, frame = pcall(CreateFrame, frameType, name, parent, backdropInherits)
     if ok then
         return frame
     end
