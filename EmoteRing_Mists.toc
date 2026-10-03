@@ -1,4 +1,4 @@
-## Interface: 16001, 11509
+## Interface: 50504
 ## Title: EmoteRing
 ## Notes: Ein radialer Emote-Ring im Stil des Retail-Ping-Systems.
 ## Author: ChromieDE

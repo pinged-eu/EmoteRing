@@ -190,7 +190,7 @@ function Addon:StartBindingCapture()
 end
 
 local function CreateBindingCapture(panel)
-    local capture = CreateFrame("Button", nil, panel, "BackdropTemplate")
+    local capture = Addon:CreateBackdropFrame("Button", nil, panel)
     capture:SetAllPoints()
     capture:SetFrameLevel(1000)
     capture:SetBackdrop({ bgFile = "Interface\\Buttons\\WHITE8X8" })
@@ -205,7 +205,7 @@ local function CreateBindingCapture(panel)
     border:SetPoint("CENTER")
     border:SetSize(430, 168)
 
-    local inner = CreateFrame("Frame", nil, capture, "BackdropTemplate")
+    local inner = Addon:CreateBackdropFrame("Frame", nil, capture)
     inner:SetPoint("CENTER")
     inner:SetSize(426, 164)
     ApplyDarkBackdrop(inner, 1)
@@ -234,7 +234,7 @@ local function CreateBindingCapture(panel)
 end
 
 local function CreateSlotCard(parent, index)
-    local card = CreateFrame("Frame", nil, parent, "BackdropTemplate")
+    local card = Addon:CreateBackdropFrame("Frame", nil, parent)
     card:SetSize(326, 54)
     card:SetBackdrop({
         bgFile = "Interface\\Buttons\\WHITE8X8",
@@ -245,7 +245,7 @@ local function CreateSlotCard(parent, index)
     card:SetBackdropColor(0.08, 0.065, 0.035, 0.80)
     card:SetBackdropBorderColor(0.43, 0.36, 0.20, 0.95)
 
-    local iconBorder = CreateFrame("Frame", nil, card, "BackdropTemplate")
+    local iconBorder = Addon:CreateBackdropFrame("Frame", nil, card)
     iconBorder:SetSize(42, 42)
     iconBorder:SetPoint("LEFT", 8, 0)
     iconBorder:SetBackdrop({
@@ -328,7 +328,7 @@ local function GetSortedCatalog()
 end
 
 local function CreatePicker()
-    local picker = CreateFrame("Frame", "EmoteRingPicker", UIParent, "BackdropTemplate")
+    local picker = Addon:CreateBackdropFrame("Frame", "EmoteRingPicker", UIParent)
     picker:SetSize(730, 620)
     picker:SetPoint("CENTER")
     picker:SetFrameStrata("TOOLTIP")
@@ -395,7 +395,7 @@ local function CreatePicker()
 
     picker.buttons = {}
     for catalogIndex, entry in ipairs(GetSortedCatalog()) do
-        local button = CreateFrame("Button", nil, child, "BackdropTemplate")
+        local button = Addon:CreateBackdropFrame("Button", nil, child)
         button:SetSize(318, 48)
         button:SetBackdrop({
             bgFile = "Interface\\Buttons\\WHITE8X8",
@@ -607,7 +607,7 @@ function Addon:CreateOptions()
     -- The outer frame always matches WoW's available canvas exactly. Only
     -- the fixed design surface inside it is scaled, so neither the backdrop
     -- nor right-anchored controls can extend beyond the visible boundary.
-    local outerBackground = CreateFrame("Frame", nil, content, "BackdropTemplate")
+    local outerBackground = Addon:CreateBackdropFrame("Frame", nil, content)
     outerBackground:SetAllPoints()
     ApplyDarkBackdrop(outerBackground, 0.78)
 
@@ -813,6 +813,10 @@ function Addon:CreateOptions()
         local category = Settings.RegisterCanvasLayoutCategory(panel, "EmoteRing")
         Settings.RegisterAddOnCategory(category)
         self.settingsCategory = category
+    elseif InterfaceOptions_AddCategory then
+        -- Legacy (pre-Dragonflight) registration, used on clients without
+        -- the modern Settings namespace.
+        InterfaceOptions_AddCategory(panel)
     end
 
     self:RefreshOptions()
