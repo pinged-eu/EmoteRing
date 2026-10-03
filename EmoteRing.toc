@@ -1,4 +1,4 @@
-## Interface: 120007
+## Interface: 120100, 120105
 ## Title: EmoteRing
 ## Notes: Ein radialer Emote-Ring im Stil des Retail-Ping-Systems.
 ## Author: ChromieDE
