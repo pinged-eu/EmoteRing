@@ -26,6 +26,38 @@ local function IsSecret(value)
     return issecretvalue and issecretvalue(value)
 end
 
+-- Some client forks (e.g. non-retail/mixed-API flavors such as "Forever")
+-- may not register the BackdropTemplate mixin that retail has required
+-- since 8.0. On such clients SetBackdrop is built into the base Frame
+-- mixin instead, so creating the frame without the template still works.
+function Addon:CreateBackdropFrame(frameType, name, parent, inherits)
+    local ok, frame = pcall(CreateFrame, frameType, name, parent, "BackdropTemplate")
+    if ok then
+        return frame
+    end
+    return CreateFrame(frameType, name, parent, inherits)
+end
+
+-- C_Timer is a relatively recent (MoP+) global. Fall back to an
+-- OnUpdate-driven ticker so delayed actions still work on clients that
+-- lack it.
+function Addon:After(delay, callback)
+    if C_Timer and C_Timer.After then
+        C_Timer.After(delay, callback)
+        return
+    end
+
+    local ticker = CreateFrame("Frame")
+    local elapsed = 0
+    ticker:SetScript("OnUpdate", function(_, delta)
+        elapsed = elapsed + delta
+        if elapsed >= delay then
+            ticker:SetScript("OnUpdate", nil)
+            callback()
+        end
+    end)
+end
+
 function Addon:InitializeDatabase()
     EmoteRingDB = EmoteRingDB or {}
     local legacySlots = type(EmoteRingDB.slots) == "table" and CopyTable(EmoteRingDB.slots) or nil
@@ -359,6 +391,12 @@ end
 function Addon:OpenOptions()
     if self.settingsCategory and Settings and Settings.OpenToCategory then
         Settings.OpenToCategory(self.settingsCategory:GetID())
+    elseif self.optionsPanel and InterfaceOptionsFrame_OpenToCategory then
+        -- Legacy (pre-Dragonflight) options API, kept as a fallback for
+        -- clients without the modern Settings namespace. Blizzard's own
+        -- UI needs this call twice to focus the category reliably.
+        InterfaceOptionsFrame_OpenToCategory(self.optionsPanel)
+        InterfaceOptionsFrame_OpenToCategory(self.optionsPanel)
     else
         self:Print("/ering")
     end
@@ -391,7 +429,7 @@ eventFrame:SetScript("OnEvent", function(_, event, loadedAddon)
         end
     elseif event == "PLAYER_LOGIN" then
         Addon:MigrateLegacyBinding()
-        C_Timer.After(1, function()
+        Addon:After(1, function()
             Addon:MigrateLegacyBinding()
             Addon:RefreshOptions()
         end)

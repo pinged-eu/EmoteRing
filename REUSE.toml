@@ -13,7 +13,7 @@ path = [
     "Options.lua",
     "Ring.lua",
     "Media/**",
-    "EmoteRing.toc",
+    "EmoteRing*.toc",
     "LICENSE.txt",
     "README.txt",
 ]
