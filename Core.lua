@@ -26,6 +26,52 @@ local function IsSecret(value)
     return issecretvalue and issecretvalue(value)
 end
 
+-- Some client forks (e.g. non-retail/mixed-API flavors such as "Forever")
+-- may not register the BackdropTemplate mixin that retail has required
+-- since 8.0. On such clients SetBackdrop is built into the base Frame
+-- mixin instead, so creating the frame without the template still works.
+function Addon:CreateBackdropFrame(frameType, name, parent, inherits)
+    local backdropInherits = inherits and (inherits .. ",BackdropTemplate") or "BackdropTemplate"
+    local ok, frame = pcall(CreateFrame, frameType, name, parent, backdropInherits)
+    if ok then
+        return frame
+    end
+    return CreateFrame(frameType, name, parent, inherits)
+end
+
+-- C_Timer is a relatively recent (MoP+) global. Fall back to an
+-- OnUpdate-driven ticker so delayed actions still work on clients that
+-- lack it. Frames cannot be destroyed, so a single shared dispatcher frame
+-- is reused for every pending callback instead of allocating one per call.
+local fallbackTickerFrame
+local fallbackPendingTimers = {}
+
+local function RunFallbackTimers(_, delta)
+    for index = #fallbackPendingTimers, 1, -1 do
+        local timer = fallbackPendingTimers[index]
+        timer.elapsed = timer.elapsed + delta
+        if timer.elapsed >= timer.delay then
+            table.remove(fallbackPendingTimers, index)
+            timer.callback()
+        end
+    end
+
+    if #fallbackPendingTimers == 0 then
+        fallbackTickerFrame:SetScript("OnUpdate", nil)
+    end
+end
+
+function Addon:After(delay, callback)
+    if C_Timer and C_Timer.After then
+        C_Timer.After(delay, callback)
+        return
+    end
+
+    fallbackTickerFrame = fallbackTickerFrame or CreateFrame("Frame")
+    table.insert(fallbackPendingTimers, { delay = delay, callback = callback, elapsed = 0 })
+    fallbackTickerFrame:SetScript("OnUpdate", RunFallbackTimers)
+end
+
 function Addon:InitializeDatabase()
     EmoteRingDB = EmoteRingDB or {}
     local legacySlots = type(EmoteRingDB.slots) == "table" and CopyTable(EmoteRingDB.slots) or nil
@@ -359,6 +405,12 @@ end
 function Addon:OpenOptions()
     if self.settingsCategory and Settings and Settings.OpenToCategory then
         Settings.OpenToCategory(self.settingsCategory:GetID())
+    elseif self.optionsPanel and InterfaceOptionsFrame_OpenToCategory then
+        -- Legacy (pre-Dragonflight) options API, kept as a fallback for
+        -- clients without the modern Settings namespace. Blizzard's own
+        -- UI needs this call twice to focus the category reliably.
+        InterfaceOptionsFrame_OpenToCategory(self.optionsPanel)
+        InterfaceOptionsFrame_OpenToCategory(self.optionsPanel)
     else
         self:Print("/ering")
     end
@@ -391,7 +443,7 @@ eventFrame:SetScript("OnEvent", function(_, event, loadedAddon)
         end
     elseif event == "PLAYER_LOGIN" then
         Addon:MigrateLegacyBinding()
-        C_Timer.After(1, function()
+        Addon:After(1, function()
             Addon:MigrateLegacyBinding()
             Addon:RefreshOptions()
         end)

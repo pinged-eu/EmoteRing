@@ -13,6 +13,14 @@ Installation
    nicht zuverlässig als Tastenbelegung. Bitte einen Buchstaben, eine Zahl,
    eine F-Taste oder eine Modifikator-Kombination (z. B. ALT-K) verwenden.
 
+Für Classic-Varianten (TBC, Wrath, Mists) liegen zusätzliche TOC-Dateien bei
+(siehe "Multi-TOC" unten), die automatisch anhand des jeweiligen Clients
+ausgewählt werden bzw. auf "EmoteRing.toc" zurückfallen. Der WoW-Forever-
+Client (1.60.1) meldet sich gegenüber Addons als "Mainline" und lädt daher
+"EmoteRing_Mainline.toc". Die Unterstützung von Clients jenseits von Retail
+ist experimentell, da deren genaue API nicht vollständig dokumentiert ist –
+bitte Fehler über BugSack/BugGrabber melden (siehe CONTRIBUTING.md).
+
 Beim Update von einer älteren Testversion wird die alte Taste beim Login auf
 das sichere Mouseover-Binding umgestellt. Falls im Chat eine entsprechende
 Meldung erscheint, die Taste danach einfach noch einmal drücken.
@@ -51,6 +59,24 @@ Standard-Emotes automatisch in der Kategorie "Weitere". Diese Einträge nutzen
 ein neutrales Symbol, da WoW nicht jedem Text-Emote ein eigenes Icon zuordnet.
 AFK und "Nicht stören" sind als separate Statusaktionen vorhanden.
 
+Multi-TOC (Client-Varianten)
+-----------------------------
+Der Ordner enthält mehrere TOC-Dateien, von denen der WoW-Client automatisch
+die zu ihm passende lädt:
+
+- EmoteRing.toc            Fallback (u. a. Classic Era)
+- EmoteRing_Mainline.toc   Retail, sowie WoW Forever (1.60.1) – dieser Client
+                           meldet sich intern als "Mainline"
+- EmoteRing_TBC.toc        Burning Crusade Classic
+- EmoteRing_Wrath.toc      Wrath of the Lich King Classic
+- EmoteRing_Mists.toc      Mists of Pandaria Classic
+
+Erkennt der Client keine der speziell benannten Varianten, greift er
+automatisch auf "EmoteRing.toc" zurück. Die "## Interface"-Zeile von
+"EmoteRing_Mainline.toc" enthält daher zusätzlich die nicht offiziell von
+Blizzard unterstützte Interface-Nummer 16001 (WoW Forever), damit das Addon
+dort nicht als "inkompatibel" markiert wird.
+
 Minimap
 -------
 - Linksklick: Optionen öffnen
@@ -69,6 +95,9 @@ Befehle
 Umfang dieser Version
 ---------------------
 - World of Warcraft Retail, Interface 120100/120105
+- Experimentelle Unterstützung für Classic-Varianten (TBC, Wrath, Mists) und
+  WoW Forever (Client 1.60.1, Interface 16001) über zusätzliche TOC-Dateien
+  (siehe Abschnitt "Multi-TOC" oben)
 - Vier Layouts mit jeweils acht frei belegbaren Ringplätzen
 - Kategorie-Filter, Suche und Sortierung der Emote-Auswahl
 - Deutsches und englisches Interface

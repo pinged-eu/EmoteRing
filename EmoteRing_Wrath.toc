@@ -1,4 +1,4 @@
-## Interface: 11509
+## Interface: 38001, 38002
 ## Title: EmoteRing
 ## Notes: Ein radialer Emote-Ring im Stil des Retail-Ping-Systems.
 ## Author: ChromieDE
