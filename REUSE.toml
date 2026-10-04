@@ -26,6 +26,7 @@ SPDX-License-Identifier = "MIT"
 path = [
 	"renovate.json",
     ".github/**",
+    ".updatePreRelease.ps1",
     ".editorconfig",
     ".gitignore",
     ".gitattributes",
@@ -35,6 +36,7 @@ path = [
     "curseforge-origin.md",
     "REUSE.toml",
     "CHANGELOG.md",
+    ".changelogs/**",
     "cliff.toml",
 ]
 precedence = "closest"
