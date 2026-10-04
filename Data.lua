@@ -1,7 +1,7 @@
 local addonName, Addon = ...
 
 Addon.name = addonName
-Addon.version = "0.2.2"
+Addon.version = "0.5.0"
 
 local deDE = {
     ADDON_DESCRIPTION = "Halte die Taste gedrückt, wähle mit der Maus ein Emote und lasse die Taste los.",

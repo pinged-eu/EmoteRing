@@ -6,6 +6,20 @@ Versionierung an [Semantic Versioning].
 
 [Keep a Changelog]: https://keepachangelog.com/de/1.1.0/
 [Semantic Versioning]: https://semver.org/lang/de/
+## [Unreleased]
+
+### Features
+
+- **release:** Stamp release tag into Addon.version (#10) ([08cfaf9](https://github.com/pinged-eu/EmoteRing/commit/08cfaf92995f8017797fd3037cd2fe3d38d17d3e))
+
+- **compat:** Add experimental WoW Forever (1.60.1) support (#9) ([616741f](https://github.com/pinged-eu/EmoteRing/commit/616741fda030963a8d7eeedfcc4ea801bbe10c9c))
+
+
+### Other
+
+- 🔨 prepare next release ([194179c](https://github.com/pinged-eu/EmoteRing/commit/194179c77a894a573a5c59436d5e57915af1d464))
+
+
 ## [0.4.0] - 2026-10-03
 
 ### Features
