@@ -6,7 +6,7 @@ Versionierung an [Semantic Versioning].
 
 [Keep a Changelog]: https://keepachangelog.com/de/1.1.0/
 [Semantic Versioning]: https://semver.org/lang/de/
-## [Unreleased]
+## [0.5.0] - 2026-10-04
 
 ### Features
 
