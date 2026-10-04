@@ -41,22 +41,35 @@ end
 
 -- C_Timer is a relatively recent (MoP+) global. Fall back to an
 -- OnUpdate-driven ticker so delayed actions still work on clients that
--- lack it.
+-- lack it. Frames cannot be destroyed, so a single shared dispatcher frame
+-- is reused for every pending callback instead of allocating one per call.
+local fallbackTickerFrame
+local fallbackPendingTimers = {}
+
+local function RunFallbackTimers(_, delta)
+    for index = #fallbackPendingTimers, 1, -1 do
+        local timer = fallbackPendingTimers[index]
+        timer.elapsed = timer.elapsed + delta
+        if timer.elapsed >= timer.delay then
+            table.remove(fallbackPendingTimers, index)
+            timer.callback()
+        end
+    end
+
+    if #fallbackPendingTimers == 0 then
+        fallbackTickerFrame:SetScript("OnUpdate", nil)
+    end
+end
+
 function Addon:After(delay, callback)
     if C_Timer and C_Timer.After then
         C_Timer.After(delay, callback)
         return
     end
 
-    local ticker = CreateFrame("Frame")
-    local elapsed = 0
-    ticker:SetScript("OnUpdate", function(_, delta)
-        elapsed = elapsed + delta
-        if elapsed >= delay then
-            ticker:SetScript("OnUpdate", nil)
-            callback()
-        end
-    end)
+    fallbackTickerFrame = fallbackTickerFrame or CreateFrame("Frame")
+    table.insert(fallbackPendingTimers, { delay = delay, callback = callback, elapsed = 0 })
+    fallbackTickerFrame:SetScript("OnUpdate", RunFallbackTimers)
 end
 
 function Addon:InitializeDatabase()
