@@ -20,6 +20,8 @@ if (Test-Path $dataFile) {
     }
     Set-Content -Path $dataFile -Value $updated -NoNewline
     git add $dataFile
+} else {
+    throw "Could not find $dataFile, aborting release."
 }
 
 # Example: run project-specific checks before the release is committed
